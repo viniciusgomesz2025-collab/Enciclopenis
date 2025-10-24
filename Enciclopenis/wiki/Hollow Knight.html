@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollow Knight - Enciclopênis</title>
+    <link rel="stylesheet" href="../estilo.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-hover: #eaecf0;
+            --text-primary: #202122;
+            --text-secondary: #54595d;
+            --border-color: #a2a9b1;
+            --link-color: #0645ad;
+            --link-visited: #0b0080;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-hover: #3a3a3a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a8a8a8;
+            --border-color: #4a4a4a;
+            --link-color: #6b9dff;
+            --link-visited: #9f8fff;
+            --shadow: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            padding: 0 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        aside {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        aside h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            transition: color 0.4s ease;
+        }
+
+        aside ul {
+            list-style: none;
+        }
+
+        aside li {
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        aside li:hover {
+            transform: translateX(5px);
+        }
+
+        aside a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        aside a:hover {
+            color: var(--link-visited);
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+            animation: slideInRight 0.6s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            transition: color 0.4s ease;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            transition: color 0.4s ease;
+        }
+
+        a {
+            color: var(--link-color);
+            transition: color 0.3s ease;
+        }
+
+        a:visited {
+            color: var(--link-visited);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .infobox {
+            float: right;
+            width: 300px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            margin: 0 0 1rem 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInScale 0.8s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .infobox img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .infobox img:hover {
+            transform: scale(1.05);
+        }
+
+        .infobox h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        .infobox-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .infobox-label {
+            font-weight: bold;
+            color: var(--text-primary);
+            min-width: 100px;
+        }
+
+        .infobox-value {
+            color: var(--text-secondary);
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: static;
+            }
+
+            .infobox {
+                float: none;
+                width: 100%;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">📚 Enciclopênis</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Alternar Tema</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <h3>Conteúdo</h3>
+            <ul>
+                <li><a href="#sinopse">Sinopse</a></li>
+                <li><a href="#jogabilidade">Jogabilidade</a></li>
+                <li><a href="#historia">História</a></li>
+                <li><a href="#personagens">Personagens</a></li>
+                <li><a href="#mundo">Mundo</a></li>
+                <li><a href="#desenvolvimento">Desenvolvimento</a></li>
+                <li><a href="#recepcao">Recepção</a></li>
+            </ul>
+        </aside>
+
+        <main>
+            <div class="tags">
+                <span class="tag">🎮 Indie</span>
+                <span class="tag">⚔️ Metroidvania</span>
+                <span class="tag">🐛 Team Cherry</span>
+            </div>
+
+            <h1>Hollow Knight</h1>
+
+            <div class="infobox">
+                <h3>Hollow Knight</h3>
+                <img src="../img/6.jpg" alt="Hollow Knight">
+                <div class="infobox-row">
+                    <span class="infobox-label">Desenvolvedora:</span>
+                    <span class="infobox-value">Team Cherry</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Lançamento:</span>
+                    <span class="infobox-value">24 de fevereiro de 2017</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Plataformas:</span>
+                    <span class="infobox-value">PC, PS4, Xbox One, Switch</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Gênero:</span>
+                    <span class="infobox-value">Metroidvania, Ação</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Engine:</span>
+                    <span class="infobox-value">Unity</span>
+                </div>
+            </div>
+
+            <p><strong>Hollow Knight</strong> é um jogo indie de ação e aventura no estilo Metroidvania desenvolvido e publicado pela Team Cherry. O jogo se passa em Hallownest, um reino subterrâneo caído habitado por insetos e outras criaturas. Os jogadores controlam um cavaleiro sem nome enquanto exploram o vasto mundo interconectado, enfrentando inimigos desafiadores e chefes épicos.</p>
+
+            <h2 id="sinopse">Sinopse</h2>
+            <p>Um cavaleiro misterioso desce até as profundezas de Hallownest, um antigo reino de insetos que já foi próspero mas agora está em ruínas. Guiado por sonhos e uma voz distante, o cavaleiro busca descobrir os segredos deste lugar esquecido, enfrentar criaturas corrompidas pela Infecção e potencialmente salvar (ou destruir) o que resta deste reino moribundo.</p>
+
+            <p>A jornada leva o cavaleiro através de cavernas labirínticas, cidades abandonadas, jardins mortais e reinos profundos, onde ele descobrirá a verdade sobre sua própria identidade e o destino trágico de Hallownest.</p>
+
+            <h2 id="jogabilidade">Jogabilidade</h2>
+            <p>Hollow Knight é um Metroidvania 2D que enfatiza exploração, combate preciso e progressão através de habilidades. O jogador controla o Knight, um pequeno inseto guerreiro armado com um Nail (unha-espada), explorando o mundo interconectado de Hallownest.</p>
+
+            <h3>Combate</h3>
+            <p>O combate em Hollow Knight é baseado em timing preciso e padrões de ataque. O jogador pode:</p>
+            <p>• Atacar inimigos com o Nail em quatro direções</p>
+            <p>• Usar Charms (amuletos) para personalizar habilidades e estatísticas</p>
+            <p>• Aprender feitiços mágicos como Vengeful Spirit e Shade Soul</p>
+            <p>• Curar usando Soul (alma) coletada de inimigos derrotados</p>
+
+            <h3>Exploração</h3>
+            <p>O mundo é vasto e interconectado, recompensando exploração com itens secretos, atalhos e lore escondida. Habilidades como Dash, Wall Jump e Monarch Wings permitem acessar novas áreas anteriormente inacessíveis.</p>
+
+            <h3>Boss Fights</h3>
+            <p>O jogo é famoso por seus chefes desafiadores e memoráveis. Desde o trágico False Knight até o épico Radiance, cada chefe testa as habilidades do jogador de formas únicas. Alguns dos chefes mais notórios incluem Mantis Lords, Soul Master, Hornet e o devastador Nightmare King Grimm.</p>
+
+            <h2 id="historia">História</h2>
+            <p>Hallownest era um próspero reino de insetos governado pelo Pale King. Quando uma antiga força conhecida como Radiance começou a infectar a mente dos habitantes, transformando-os em criaturas zumbis violentas, o reino entrou em colapso.</p>
+
+            <p>Para conter a Infecção, o Pale King criou os Vessels - seres vazios sem mente, pensamento ou vontade. O mais "puro" destes Vessels foi escolhido como Hollow Knight e selado no Black Egg Temple junto com a Radiance, servindo como recipiente vivo para aprisioná-la.</p>
+
+            <p>Porém, o plano falhou. O Hollow Knight não era tão vazio quanto se pensava, e a Infecção começou a vazar novamente. O Knight, outro Vessel que escapou de Hallownest anos atrás, retorna para confrontar seu destino e potencialmente substituir o Hollow Knight ou destruir a Radiance de uma vez por todas.</p>
+
+            <h2 id="personagens">Personagens Principais</h2>
+            
+            <h3>The Knight</h3>
+            <p>O protagonista silencioso do jogo. Um Vessel criado pelo Pale King, o Knight é pequeno mas determinado. Sua verdadeira natureza e propósito são revelados gradualmente através da história.</p>
+
+            <h3>Hornet</h3>
+            <p>Uma guerreira ágil que serve como guardiã de Hallownest. Filha do Pale King e da Deepnest's queen Herrah, Hornet confronta o Knight múltiplas vezes para testar sua força e determinação.</p>
+
+            <h3>The Pale King</h3>
+            <p>O antigo governante de Hallownest, um ser poderoso que trouxe civilização e consciência aos insetos através de sua luz pálida. Suas ações desesperadas para salvar seu reino levaram a consequências trágicas.</p>
+
+            <h3>The Radiance</h3>
+            <p>Uma antiga deusa-traça que foi esquecida quando o Pale King ascendeu ao poder. Sua raiva e desejo de ser lembrada manifestou-se como a Infecção que destruiu Hallownest.</p>
+
+            <h3>The Hollow Knight</h3>
+            <p>O Vessel escolhido para aprisionar a Radiance. Acorrentado no Black Egg Temple, sofre eternamente enquanto tenta conter a infecção dentro de si.</p>
+
+            <h2 id="mundo">O Mundo de Hallownest</h2>
+            <p>Hallownest é dividido em diversas áreas distintas, cada uma com sua própria estética, inimigos e desafios:</p>
+
+            <p><strong>Dirtmouth:</strong> A vila superficial que serve como hub principal do jogo.</p>
+
+            <p><strong>Forgotten Crossroads:</strong> As ruínas centrais de Hallownest, conectando a maioria das outras áreas.</p>
+
+            <p><strong>Greenpath:</strong> Jardins exuberantes e verdes cheios de vida vegetal e insetos pacíficos corrompidos.</p>
+
+            <p><strong>City of Tears:</strong> A antiga capital de Hallownest, uma cidade majestosa agora abandonada sob chuva perpétua.</p>
+
+            <p><strong>Deepnest:</strong> Cavernas sombrias e claustrofóbicas infestadas com aranhas e outros horrores.</p>
+
+            <p><strong>Crystal Peak:</strong> Minas de cristal brilhantes habitadas por mineradores zumbificados.</p>
+
+            <p><strong>Kingdom's Edge:</strong> Os limites do reino, lar de guerreiros e criaturas perigosas.</p>
+
+            <h2 id="desenvolvimento">Desenvolvimento</h2>
+            <p>Hollow Knight foi desenvolvido pela Team Cherry, um pequeno estúdio indie de Adelaide, Austrália, fundado por Ari Gibson, William Pellen e Jack Vine. O projeto começou com uma campanha no Kickstarter em 2014, buscando AU$35.000 e arrecadando mais de AU$57.000.</p>
+
+            <p>O desenvolvimento levou cerca de dois anos e meio, com a equipe trabalhando em tempo integral no jogo. A arte distinta do jogo foi criada por Ari Gibson, enquanto a atmosfera foi amplificada pela trilha sonora emocional de Christopher Larkin.</p>
+
+            <p>O jogo foi lançado inicialmente para PC em fevereiro de 2017, recebendo quatro grandes expansões gratuitas de conteúdo: Hidden Dreams, The Grimm Troupe, Lifeblood e Godmaster. Posteriormente foi portado para todas as principais plataformas.</p>
+
+            <h2 id="recepcao">Recepção e Legado</h2>
+            <p>Hollow Knight foi aclamado universalmente pela crítica e jogadores, sendo considerado um dos melhores jogos indie já criados. O jogo vendeu mais de 3 milhões de cópias até 2020.</p>
+
+            <p>Críticos elogiaram a direção artística impressionante, a jogabilidade desafiadora mas justa, a trilha sonora atmosférica, a exploração recompensadora e a quantidade massiva de conteúdo pelo preço acessível.</p>
+
+            <p>O jogo foi comparado favoravelmente a clássicos do gênero como Super Metroid e Castlevania: Symphony of the Night, sendo frequentemente citado como exemplo definitivo de Metroidvania moderno.</p>
+
+            <p>Uma sequência, Hollow Knight: Silksong, está em desenvolvimento, focando em Hornet como protagonista jogável. O anúncio gerou imensa antecipação na comunidade de jogos indie.</p>
+
+            <p><em>"Git gud"</em> tornou-se o mantra não oficial dos fãs de Hollow Knight, encorajando perseverança através dos desafios brutais do jogo.</p>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Carregar tema salvo
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>

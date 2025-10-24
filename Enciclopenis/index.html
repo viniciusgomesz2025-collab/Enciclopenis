@@ -432,22 +432,22 @@
             <div class="nsfw-warning">
                 ⚠️ CONTEÚDO ADULTO - Este conteúdo é destinado apenas para maiores de 18 anos seu crianção!
             </div>
-            <h2 class="section-title">🔞 Artigos NSFW</h2>
+            <h2 class="section-title">🔞 Putaria</h2>
             <div class="articles-grid">
                 <div class="article-card" onclick="navigateToArticle('nsfw-exemplo-1')">
                     <img src="img/nsfw.png" alt="Artigo NSFW" class="article-image">
                     <h3>OkegomFag</h3>
-                    <p>Veja as maiores atrocidades do mundo de Funamusea.</p>
+                    <p>Imagens pegas pelos sites: Rule34, Okegomfag, Pinterest, rule34paheal</p>
                     <div class="article-meta">
                         <span class="tag nsfw">NSFW</span>
-                        <span class="tag">Funamusea/DeepSeaPrisioner</span>
+                        <span class="tag">Categoria</span>
                     </div>
                 </div>
                 
                 <div class="article-card" onclick="navigateToArticle('nsfw-exemplo-2')">
                     <img src="https://cdn.discordapp.com/attachments/1347391447510548551/1395466337165250741/2025071715035829.jpg?ex=68fbbfcd&is=68fa6e4d&hm=02bf899166ddee3e39fa5a7173518600485b5c7a99ecda8d0a783eb7d4cb72c0&" alt="Artigo NSFW" class="article-image">
                     <h3>Cantinho Paralelo</h3>
-                    <p>ME COME ENT KRLH!!</p>
+                    <p>ME COME ENT KRLH!!! - erik pibble</p>
                     <div class="article-meta">
                         <span class="tag nsfw">NSFW</span>
                         <span class="tag">Categoria</span>
@@ -474,17 +474,8 @@
 
         // Função para navegar aos artigos
         function navigateToArticle(articleName) {
-            // Remove caracteres especiais e espaços, substitui por hífens
-            const cleanName = articleName
-                .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '') // Remove acentos
-                .replace(/[^a-z0-9\s-]/g, '') // Remove caracteres especiais
-                .replace(/\s+/g, '-') // Substitui espaços por hífens
-                .replace(/-+/g, '-'); // Remove hífens duplicados
-            
-            // Remove a extensão .html para URLs limpas no Netlify
-            window.location.href = `/wiki/${cleanName}`;
+            // Usa o nome do arquivo exatamente como passado
+            window.location.href = `/wiki/${articleName}.html`;
         }
 
         // Função placeholder para filtrar por categoria

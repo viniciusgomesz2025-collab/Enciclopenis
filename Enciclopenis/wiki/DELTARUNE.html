@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELTARUNE - Enciclopênis</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        /* Todos os estilos do seu template original foram mantidos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-hover: #eaecf0;
+            --text-primary: #202122;
+            --text-secondary: #54595d;
+            --border-color: #a2a9b1;
+            --link-color: #0645ad;
+            --link-visited: #0b0080;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-hover: #3a3a3a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a8a8a8;
+            --border-color: #4a4a4a;
+            --link-color: #6b9dff;
+            --link-visited: #9f8fff;
+            --shadow: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            padding: 0 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        aside {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        aside h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            transition: color 0.4s ease;
+        }
+
+        aside ul {
+            list-style: none;
+        }
+
+        aside li {
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        aside li:hover {
+            transform: translateX(5px);
+        }
+
+        aside a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        aside a:hover {
+            color: var(--link-visited);
+            text-decoration: underline;
+        }
+
+        main {
+            background-color: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+            animation: slideInRight 0.6s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            transition: color 0.4s ease;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            transition: color 0.4s ease;
+        }
+
+        a {
+            color: var(--link-color);
+            transition: color 0.3s ease;
+        }
+
+        a:visited {
+            color: var(--link-visited);
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .infobox {
+            float: right;
+            width: 300px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            margin: 0 0 1rem 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            animation: fadeInScale 0.8s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .infobox img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .infobox img:hover {
+            transform: scale(1.05);
+        }
+
+        .infobox h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        .infobox-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .infobox-label {
+            font-weight: bold;
+            color: var(--text-primary);
+            min-width: 100px;
+        }
+
+        .infobox-value {
+            color: var(--text-secondary);
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .reference {
+            color: var(--link-color);
+            font-size: 0.8rem;
+            vertical-align: super;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .reference:hover {
+            transform: scale(1.2);
+            display: inline-block;
+        }
+
+        .article-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .article-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- NOVO ESTILO ADICIONADO PARA OS PERSONAGENS --- */
+        .character-entry {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .character-entry:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .character-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 1.5rem;
+            border: 3px solid var(--border-color);
+            flex-shrink: 0; /* Impede a imagem de encolher */
+        }
+
+        .character-description {
+            flex-grow: 1;
+        }
+
+        .character-description strong {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            display: block; /* Faz o nome ficar em sua própria linha */
+            margin-bottom: 0.25rem;
+        }
+        /* --- FIM DO NOVO ESTILO --- */
+
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                position: static;
+            }
+
+            .infobox {
+                float: none;
+                width: 100%;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="../index.html" class="logo">📚 Enciclopênis</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Alternar Tema</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <h3>Conteúdo</h3>
+            <ul>
+                <li><a href="#sinopse">Sinopse</a></li>
+                <li><a href="#jogabilidade">Jogabilidade</a></li>
+                <li><a href="#personagens">Personagens</a></li>
+                <li><a href="#desenvolvimento">Desenvolvimento</a></li>
+                <li><a href="#recepcao">Recepção</a></li>
+            </ul>
+        </aside>
+
+        <main>
+            <div class="tags">
+                <span class="tag">🎮 Indie</span>
+                <span class="tag">🎨 Toby Fox</span>
+                <span class="tag">🕹️ RPG</span>
+            </div>
+
+            <h1>DELTARUNE</h1>
+
+            <div class="infobox">
+                <h3>DELTARUNE</h3>
+                <img src="../img/7.jpg" alt="Arte principal de DELTARUNE">
+                <div class="infobox-row">
+                    <span class="infobox-label">Desenvolvedor:</span>
+                    <span class="infobox-value">Toby Fox</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Lançamento:</span>
+                    <span class="infobox-value">2018 (Cap. 1)</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Plataforma:</span>
+                    <span class="infobox-value">PC, Mac, PS4, Switch</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Gênero:</span>
+                    <span class="infobox-value">RPG</span>
+                </div>
+                <div class="infobox-row">
+                    <span class="infobox-label">Engine:</span>
+                    <span class="infobox-value">GameMaker Studio</span>
+                </div>
+            </div>
+
+            <p><strong>DELTARUNE</strong> é um jogo de RPG criado por Toby Fox, o aclamado desenvolvedor de <em>Undertale</em>. O jogo está sendo lançado em capítulos, com os dois primeiros (lançados em 2018 e 2021, respectivamente) disponíveis gratuitamente.</p>
+
+            <h2 id="sinopse">Sinopse</h2>
+            <p>A história segue Kris, um humano quieto, e Susie, uma colega de classe monstruosa e agressiva. Um dia, ao procurarem por giz no armário de suprimentos da escola, ambos são puxados para um "Mundo Sombrio".</p>
+            <p>Lá, eles conhecem Ralsei, um príncipe solitário que revela uma profecia: três heróis (um Humano, um Monstro e um Príncipe das Trevas) devem selar a Fonte de Trevas para restaurar o equilíbrio daquele mundo e poderem voltar para casa.</p>
+
+            <h2 id="jogabilidade">Jogabilidade</h2>
+            <p>DELTARUNE expande o sistema de batalha de <em>Undertale</em>. O jogador controla um grupo de até três personagens em batalhas por turnos. Os ataques inimigos tomam a forma de padrões de "bullet hell" que a ALMA do jogador deve desviar.</p>
+            <p>Além de lutar, o jogador pode usar "Magia" (como a cura de Ralsei) e "Agir" (ACT) para interagir com os inimigos de forma não-violenta. O sistema de TP (Tension Points) é ganho ao defender ou roçar em projéteis inimigos, permitindo o uso de magias mais fortes.</p>
+
+            <h2 id="personagens">Personagens Principais</h2>
+
+            <div class="character-entry">
+                <img src="img/1.jpg" alt="Kris" class="character-image">
+                <div class="character-description">
+                    <p><strong>Kris:</strong> O protagonista (aura + ego 💀💀💀) farmador de aura.</p>
+                </div>
+            </div>
+
+            <div class="character-entry">
+                <img src="img/2.jpg" alt="Susie" class="character-image">
+                <div class="character-description">
+                    <p><strong>Susie:</strong>A "valentona" que faz cosplay de Barney roxo com uma personalidade emo gótica (amo góticas) </p>
+                </div>
+            </div>
+
+            <div class="character-entry">
+                <img src="img/3.jpg" alt="Ralsei" class="character-image">
+                <div class="character-description">
+                    <p><strong>Ralsei:</strong>O príncipe que tem uma quedinha pelo nosso farmador de aura.</p>
+                </div>
+            </div>
+
+            <div class="character-entry">
+                <img src="img/4.jpg" alt="Lancer" class="character-image">
+                <div class="character-description">
+                    <p><strong>Lancer:</strong> Filhin de papai que se acha o bonzão do time. É o que mais leva hate KKKKKKKKK</p>
+                </div>
+            </div>
+
+            <h2 id="desenvolvimento">Desenvolvimento</h2>
+            <p>DELTARUNE foi desenvolvido quase inteiramente por Toby Fox, incluindo o roteiro, design de personagens, e a maior parte da trilha sonora. Fox afirma que a ideia de DELTARUNE veio a ele em um sonho em 2011, antes mesmo de <em>Undertale</em>.</p>
+            <p>Ele descreve o jogo como um "jogo paralelo" a <em>Undertale</em>, ocorrendo em um universo diferente com versões alternativas de personagens conhecidos, e não é uma sequência direta.</p>
+
+            <h2 id="recepcao">Recepção</h2>
+            <p>O primeiro capítulo foi lançado de surpresa no Halloween de 2018 e foi recebido com aclamação da crítica e dos fãs. Foi elogiado pela música, humor, visuais aprimorados e pelo sistema de batalha refinado.</p>
+            <p>O Capítulo 2, lançado em 2021, foi igualmente bem recebido, com muitos elogiando a expansão da história, o desenvolvimento dos personagens e as complexas batalhas de chefe. O restante dos capítulos está atualmente em desenvolvimento.</p>
+        </main>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Carregar tema salvo
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
