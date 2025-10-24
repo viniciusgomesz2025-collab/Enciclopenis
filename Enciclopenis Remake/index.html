@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enciclopênis</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-hover: #eaecf0;
+            --text-primary: #202122;
+            --text-secondary: #54595d;
+            --border-color: #a2a9b1;
+            --link-color: #0645ad;
+            --link-visited: #0b0080;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --nsfw-tag: #dc3545;
+        }
+
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-hover: #3a3a3a;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a8a8a8;
+            --border-color: #4a4a4a;
+            --link-color: #6b9dff;
+            --link-visited: #9f8fff;
+            --shadow: rgba(255, 255, 255, 0.05);
+            --nsfw-tag: #ff6b7a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle {
+            background-color: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section {
+            background-color: var(--bg-primary);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px var(--shadow);
+            text-align: center;
+            margin-bottom: 3rem;
+            transition: all 0.4s ease;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: color 0.4s ease;
+        }
+
+        .categories-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            transition: color 0.4s ease;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background-color: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeInScale 0.6s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .category-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        .category-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.4s ease;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background-color: var(--bg-primary);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.6s ease;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.1);
+        }
+
+        .article-card > h3,
+        .article-card > p,
+        .article-card > .article-meta {
+            padding: 0 1.5rem;
+        }
+
+        .article-card > h3 {
+            padding-top: 1rem;
+        }
+
+        .article-card > .article-meta {
+            padding-bottom: 1.5rem;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .article-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        .article-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            transition: color 0.4s ease;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .tag.nsfw {
+            background-color: var(--nsfw-tag);
+            color: white;
+            font-weight: bold;
+        }
+
+        .nsfw-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            border: 2px solid var(--nsfw-tag);
+            box-shadow: 0 2px 8px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .nsfw-warning {
+            background-color: var(--nsfw-tag);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .categories-grid,
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">📚 Enciclopênis</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Alternar Tema</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Bem-vindo à Enciclopênis</h1>
+            <p>A enciclopédia livre com conhecimento para todos</p>
+        </div>
+
+        <section class="categories-section">
+            <h2 class="section-title">📂 Categorias</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('tecnologia')">
+                    <h3>💻 Tecnologia</h3>
+                    <p>12 artigos</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('ciencia')">
+                    <h3>🔬 Ciência</h3>
+                    <p>8 artigos</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('historia')">
+                    <h3>📜 História</h3>
+                    <p>15 artigos</p>
+                </div>
+                <div class="category-card" onclick="filterByCategory('arte')">
+                    <h3>🎨 Arte</h3>
+                    <p>10 artigos</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">📄 Artigos Recentes</h2>
+            <div class="articles-grid">
+                <div class="article-card" onclick="navigateToArticle('inteligencia-artificial')">
+                    <img src="img/1.jpg" alt="Inteligência Artificial" class="article-image">
+                    <h3>Castelo Mogeko</h3>
+                    <p>Um jogo sobre uma garota colegial onde tem que escapar da bilada. Por pikachus.</p>
+                    <div class="article-meta">
+                        <span class="tag">Indie</span>
+                        <span class="tag">Funamusea/DeepSeaPrisioner</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('fisica-quantica')">
+                    <img src="img/2.jpg" alt="Física Quântica" class="article-image">
+                    <h3>Hollow Knight</h3>
+                    <p>Um jogo sobre um inseto sair na porrada com deuses e até talaricos.</p>
+                    <div class="article-meta">
+                        <span class="tag">Indie</span>
+                        <span class="tag">Team Cherry</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('segunda-guerra-mundial')">
+                    <img src="img/3.jpg" alt="Segunda Guerra Mundial" class="article-image">
+                    <h3>DELTARUNE</h3>
+                    <p>uhh é um jogo sobre uhhhh pera uhhhh... A HÁ! onde você batalha com criaturas humanoides..????</p>
+                    <div class="article-meta">
+                        <span class="tag">Indie</span>
+                        <span class="tag">Toby Fox</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('renascimento')">
+                    <img src="img/4.jpg" alt="Renascimento" class="article-image">
+                    <h3>South Park</h3>
+                    <p>Puta merda eles mataram o Kenny!</p>
+                    <div class="article-meta">
+                        <span class="tag">Desenho Animado</span>
+                        <span class="tag">MTV</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('blockchain')">
+                    <img src="img/5.jpg" alt="Blockchain" class="article-image">
+                    <h3>Murder Drones</h3>
+                    <p>Resuminho básico: Robôs se fodendo na porrada com um tal de Null...</p>
+                    <div class="article-meta">
+                        <span class="tag">WebToon</span>
+                        <span class="tag">Glitch Prod</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('teoria-relatividade')">
+                    <img src="img/teoria-relatividade.png" alt="Teoria da Relatividade" class="article-image">
+                    <h3>Teoria da Relatividade</h3>
+                    <p>Teoria física desenvolvida por Albert Einstein que revolucionou o entendimento...</p>
+                    <div class="article-meta">
+                        <span class="tag">Ciência</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="nsfw-section">
+            <div class="nsfw-warning">
+                ⚠️ CONTEÚDO ADULTO - Este conteúdo é destinado apenas para maiores de 18 anos
+            </div>
+            <h2 class="section-title">🔞 Artigos NSFW</h2>
+            <div class="articles-grid">
+                <div class="article-card" onclick="navigateToArticle('educacao-sexual')">
+                    <img src="img/educacao-sexual.png" alt="Educação Sexual" class="article-image">
+                    <h3>Educação Sexual</h3>
+                    <p>Informações sobre saúde sexual, reprodução e relacionamentos saudáveis...</p>
+                    <div class="article-meta">
+                        <span class="tag nsfw">NSFW</span>
+                        <span class="tag">Educação</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('anatomia-humana')">
+                    <img src="img/anatomia-humana.png" alt="Anatomia Humana" class="article-image">
+                    <h3>Anatomia Humana Reprodutiva</h3>
+                    <p>Estudo detalhado dos sistemas reprodutivos masculino e feminino...</p>
+                    <div class="article-meta">
+                        <span class="tag nsfw">NSFW</span>
+                        <span class="tag">Ciência</span>
+                    </div>
+                </div>
+                
+                <div class="article-card" onclick="navigateToArticle('historia-sexualidade')">
+                    <img src="img/historia-sexualidade.png" alt="História da Sexualidade" class="article-image">
+                    <h3>História da Sexualidade</h3>
+                    <p>Uma análise histórica das atitudes e práticas sexuais ao longo das civilizações...</p>
+                    <div class="article-meta">
+                        <span class="tag nsfw">NSFW</span>
+                        <span class="tag">História</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Carregar tema salvo
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+
+        // Função para navegar aos artigos
+        function navigateToArticle(articleName) {
+            // Remove a extensão .html para URLs limpas no Netlify
+            window.location.href = `/wiki/${articleName}`;
+        }
+
+        // Função placeholder para filtrar por categoria
+        function filterByCategory(category) {
+            console.log(`Filtrando por categoria: ${category}`);
+            // Aqui você pode implementar a lógica de filtro
+            alert(`Filtrando artigos da categoria: ${category}`);
+        }
+    </script>
+</body>
+</html>
