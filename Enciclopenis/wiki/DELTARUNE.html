@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DELTARUNE - Enciclopênis</title>
-    <link rel="stylesheet" href="estilo.css">
     <style>
-        /* Todos os estilos do seu template original foram mantidos */
         * {
             margin: 0;
             padding: 0;
@@ -14,104 +12,47 @@
         }
 
         :root {
+            --primary-red: #e63946;
+            --primary-blue: #1d3557;
+            --primary-green: #06d6a0;
             --bg-primary: #ffffff;
             --bg-secondary: #f8f9fa;
-            --bg-hover: #eaecf0;
-            --text-primary: #202122;
-            --text-secondary: #54595d;
-            --border-color: #a2a9b1;
-            --link-color: #0645ad;
-            --link-visited: #0b0080;
-            --shadow: rgba(0, 0, 0, 0.1);
+            --bg-hover: #e8f4f8;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555555;
+            --border-color: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 0, 0, 0.16);
+            --accent-gradient: linear-gradient(135deg, #e63946 0%, #1d3557 50%, #06d6a0 100%);
+            --red-glow: rgba(230, 57, 70, 0.3);
+            --blue-glow: rgba(29, 53, 87, 0.3);
+            --green-glow: rgba(6, 214, 160, 0.3);
         }
 
         body.dark-mode {
-            --bg-primary: #1a1a1a;
-            --bg-secondary: #2d2d2d;
-            --bg-hover: #3a3a3a;
-            --text-primary: #e8e8e8;
-            --text-secondary: #a8a8a8;
-            --border-color: #4a4a4a;
-            --link-color: #6b9dff;
-            --link-visited: #9f8fff;
-            --shadow: rgba(255, 255, 255, 0.05);
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #111827;
+            --bg-hover: #1e2838;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --border-color: #2d3748;
+            --shadow: rgba(0, 0, 0, 0.4);
+            --shadow-hover: rgba(0, 0, 0, 0.6);
+            --red-glow: rgba(230, 57, 70, 0.4);
+            --blue-glow: rgba(29, 53, 87, 0.5);
+            --green-glow: rgba(6, 214, 160, 0.4);
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            transition: background-color 0.4s ease, color 0.4s ease;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: all 0.4s ease;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .theme-toggle {
-            background-color: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px var(--shadow);
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--bg-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-
-        .theme-toggle:active {
-            transform: translateY(0);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 2rem;
-            padding: 0 2rem;
-            animation: fadeIn 0.6s ease;
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -119,128 +60,26 @@
             }
         }
 
-        aside {
-            background-color: var(--bg-primary);
-            padding: 1.5rem;
-            border-radius: 8px;
-            height: fit-content;
-            position: sticky;
-            top: 100px;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: all 0.4s ease;
-            animation: slideInLeft 0.6s ease;
-        }
-
         @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-30px);
+                transform: translateX(-40px);
             }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
-        }
-
-        aside h3 {
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            transition: color 0.4s ease;
-        }
-
-        aside ul {
-            list-style: none;
-        }
-
-        aside li {
-            margin-bottom: 0.5rem;
-            transition: transform 0.2s ease;
-        }
-
-        aside li:hover {
-            transform: translateX(5px);
-        }
-
-        aside a {
-            color: var(--link-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        aside a:hover {
-            color: var(--link-visited);
-            text-decoration: underline;
-        }
-
-        main {
-            background-color: var(--bg-primary);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px var(--shadow);
-            transition: all 0.4s ease;
-            animation: slideInRight 0.6s ease;
         }
 
         @keyframes slideInRight {
             from {
                 opacity: 0;
-                transform: translateX(30px);
+                transform: translateX(40px);
             }
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            transition: color 0.4s ease;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            transition: color 0.4s ease;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            transition: color 0.4s ease;
-        }
-
-        a {
-            color: var(--link-color);
-            transition: color 0.3s ease;
-        }
-
-        a:visited {
-            color: var(--link-visited);
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .infobox {
-            float: right;
-            width: 300px;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            margin: 0 0 1rem 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            transition: all 0.4s ease;
-            animation: fadeInScale 0.8s ease;
         }
 
         @keyframes fadeInScale {
@@ -254,35 +93,382 @@
             }
         }
 
-        .infobox img {
-            width: 100%;
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-            transition: transform 0.3s ease;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        .infobox img:hover {
-            transform: scale(1.05);
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: var(--bg-primary);
+            border-bottom: 3px solid transparent;
+            border-image: var(--accent-gradient) 1;
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header:hover {
+            box-shadow: 0 6px 30px var(--shadow-hover);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--accent-gradient);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        .logo:hover {
+            transform: scale(1.1) rotate(-3deg);
+            animation: pulse 0.6s ease-in-out, gradientShift 5s ease infinite;
+        }
+
+        .theme-toggle {
+            background: var(--accent-gradient);
+            background-size: 200% 200%;
+            border: none;
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px var(--red-glow);
+            position: relative;
+            overflow: hidden;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .theme-toggle:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 8px 30px var(--red-glow), 0 8px 30px var(--green-glow);
+        }
+
+        .theme-toggle:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            padding: 0 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        aside {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 8px 30px var(--shadow);
+            transition: all 0.4s ease;
+            animation: slideInLeft 0.6s ease;
+            border: 2px solid transparent;
+        }
+
+        aside:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 12px 40px var(--green-glow);
+            transform: translateY(-5px);
+        }
+
+        aside h3 {
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3rem;
+            border-bottom: 3px solid transparent;
+            border-image: var(--accent-gradient) 1;
+            padding-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        aside ul {
+            list-style: none;
+        }
+
+        aside li {
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        aside li:hover {
+            transform: translateX(8px);
+        }
+
+        aside a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: inline-block;
+            position: relative;
+        }
+
+        aside a::before {
+            content: '→';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: var(--primary-blue);
+        }
+
+        aside a:hover::before {
+            opacity: 1;
+            left: -15px;
+        }
+
+        aside a:hover {
+            color: var(--primary-green);
+        }
+
+        main {
+            background: var(--bg-primary);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow);
+            transition: all 0.4s ease;
+            animation: slideInRight 0.6s ease;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 4px solid transparent;
+            border-image: var(--accent-gradient) 1;
+            padding-bottom: 0.8rem;
+            font-weight: 900;
+            animation: gradientShift 5s ease infinite;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            font-weight: 800;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--accent-gradient);
+            border-radius: 3px;
+        }
+
+        h2:nth-of-type(odd)::before {
+            background: var(--primary-red);
+        }
+
+        h2:nth-of-type(even)::before {
+            background: var(--primary-blue);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-secondary);
+            transition: color 0.4s ease;
+            line-height: 1.8;
+        }
+
+        a {
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+
+        a:hover {
+            color: var(--primary-red);
+            border-bottom-color: var(--primary-red);
+        }
+
+        .infobox {
+            float: right;
+            width: 320px;
+            background: var(--bg-secondary);
+            border: 3px solid transparent;
+            border-image: var(--accent-gradient) 1;
+            margin: 0 0 1.5rem 1.5rem;
+            padding: 1.5rem;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            animation: fadeInScale 0.8s ease, float 6s ease-in-out infinite;
+            box-shadow: 0 8px 30px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .infobox:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 50px var(--green-glow), 0 15px 50px var(--red-glow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .infobox.active {
+            animation: shake 0.5s ease-in-out, float 6s ease-in-out infinite;
+        }
+
+        .infobox-gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        .infobox.active .infobox-gif {
+            opacity: 0.3;
+        }
+
+        .infobox > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .infobox img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            transition: transform 0.4s ease;
+            border: 3px solid var(--border-color);
+        }
+
+        .infobox:hover img {
+            transform: scale(1.05) rotate(-1deg);
+            border-color: var(--primary-green);
         }
 
         .infobox h3 {
             text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            transition: color 0.4s ease;
+            margin-bottom: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.5rem;
+            font-weight: 800;
         }
 
         .infobox-row {
             display: flex;
-            margin-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .infobox-row:hover {
+            border-bottom-color: var(--primary-blue);
+            transform: translateX(5px);
+            background: rgba(6, 214, 160, 0.1);
+            padding: 0.3rem;
+            border-radius: 8px;
+        }
+
+        .infobox-row:active {
+            animation: bounce 0.6s ease;
         }
 
         .infobox-label {
-            font-weight: bold;
+            font-weight: 700;
             color: var(--text-primary);
-            min-width: 100px;
+            min-width: 110px;
         }
 
         .infobox-value {
@@ -291,76 +477,123 @@
 
         .tags {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.8rem;
             flex-wrap: wrap;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .tag {
             display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            background-color: var(--bg-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            background: var(--bg-secondary);
             color: var(--text-secondary);
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
         }
 
-        .tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 4px var(--shadow);
+        .tag:nth-child(1):hover {
+            background: var(--primary-red);
+            color: white;
+            transform: translateY(-3px) rotate(-2deg);
+            box-shadow: 0 6px 20px var(--red-glow);
         }
 
-        .reference {
-            color: var(--link-color);
-            font-size: 0.8rem;
-            vertical-align: super;
-            text-decoration: none;
-            transition: all 0.2s ease;
+        .tag:nth-child(2):hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px) rotate(2deg);
+            box-shadow: 0 6px 20px var(--blue-glow);
         }
 
-        .reference:hover {
-            transform: scale(1.2);
-            display: inline-block;
+        .tag:nth-child(3):hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-3px) rotate(-2deg);
+            box-shadow: 0 6px 20px var(--green-glow);
         }
 
-        .article-image {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 8px;
-            margin: 1rem 0;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-
-        .article-image:hover {
-            transform: scale(1.02);
-        }
-
-        /* --- NOVO ESTILO ADICIONADO PARA OS PERSONAGENS --- */
         .character-entry {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background-color: var(--bg-secondary);
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid transparent;
+            animation: fadeIn 0.6s ease;
+            animation-fill-mode: backwards;
         }
 
-        .character-entry:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px var(--shadow);
+        .character-entry:nth-child(1) { 
+            animation-delay: 0.1s;
+        }
+        .character-entry:nth-child(1):hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 40px var(--red-glow);
+        }
+
+        .character-entry:nth-child(2) { 
+            animation-delay: 0.2s;
+        }
+        .character-entry:nth-child(2):hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 40px var(--blue-glow);
+        }
+
+        .character-entry:nth-child(3) { 
+            animation-delay: 0.3s;
+        }
+        .character-entry:nth-child(3):hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--primary-green);
+            box-shadow: 0 10px 40px var(--green-glow);
+        }
+
+        .character-entry:nth-child(4) { 
+            animation-delay: 0.4s;
+        }
+        .character-entry:nth-child(4):hover {
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 40px var(--red-glow);
         }
 
         .character-image {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border-radius: 50%;
-            margin-right: 1.5rem;
-            border: 3px solid var(--border-color);
-            flex-shrink: 0; /* Impede a imagem de encolher */
+            margin-right: 2rem;
+            border: 4px solid transparent;
+            flex-shrink: 0;
+            transition: all 0.4s ease;
+        }
+
+        .character-entry:nth-child(1) .character-image {
+            border-color: var(--primary-red);
+        }
+
+        .character-entry:nth-child(2) .character-image {
+            border-color: var(--primary-blue);
+        }
+
+        .character-entry:nth-child(3) .character-image {
+            border-color: var(--primary-green);
+        }
+
+        .character-entry:nth-child(4) .character-image {
+            border-color: var(--primary-red);
+        }
+
+        .character-entry:hover .character-image {
+            transform: scale(1.15) rotate(8deg);
+            box-shadow: 0 8px 30px var(--shadow-hover);
         }
 
         .character-description {
@@ -368,13 +601,42 @@
         }
 
         .character-description strong {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-            display: block; /* Faz o nome ficar em sua própria linha */
-            margin-bottom: 0.25rem;
+            font-size: 1.4rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
         }
-        /* --- FIM DO NOVO ESTILO --- */
 
+        .character-description p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .sound-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 4px 20px var(--red-glow);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .sound-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         @media (max-width: 768px) {
             .container {
@@ -388,8 +650,42 @@
             .infobox {
                 float: none;
                 width: 100%;
-                margin: 1rem 0;
+                margin: 1.5rem 0;
             }
+
+            .character-entry {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .character-image {
+                margin-right: 0;
+                margin-bottom: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--red-glow) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--blue-glow) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, var(--green-glow) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
         }
     </style>
 </head>
@@ -397,7 +693,7 @@
     <header>
         <div class="header-content">
             <a href="../index.html" class="logo">📚 Enciclopênis</a>
-            <button class="theme-toggle" onclick="toggleTheme()">🌓 Alternar Tema</button>
+            <button class="theme-toggle">🌓 Alternar Tema</button>
         </div>
     </header>
 
@@ -422,26 +718,27 @@
 
             <h1>DELTARUNE</h1>
 
-            <div class="infobox">
+            <div class="infobox" id="infobox">
+                <div class="infobox-gif" id="infoboxGif"></div>
                 <h3>DELTARUNE</h3>
                 <img src="../img/7.jpg" alt="Arte principal de DELTARUNE">
-                <div class="infobox-row">
+                <div class="infobox-row" onclick="playSound('developer')">
                     <span class="infobox-label">Desenvolvedor:</span>
                     <span class="infobox-value">Toby Fox</span>
                 </div>
-                <div class="infobox-row">
+                <div class="infobox-row" onclick="playSound('release')">
                     <span class="infobox-label">Lançamento:</span>
                     <span class="infobox-value">2018 (Cap. 1)</span>
                 </div>
-                <div class="infobox-row">
+                <div class="infobox-row" onclick="playSound('platform')">
                     <span class="infobox-label">Plataforma:</span>
                     <span class="infobox-value">PC, Mac, PS4, Switch</span>
                 </div>
-                <div class="infobox-row">
+                <div class="infobox-row" onclick="playSound('genre')">
                     <span class="infobox-label">Gênero:</span>
                     <span class="infobox-value">RPG</span>
                 </div>
-                <div class="infobox-row">
+                <div class="infobox-row" onclick="playSound('engine')">
                     <span class="infobox-label">Engine:</span>
                     <span class="infobox-value">GameMaker Studio</span>
                 </div>
@@ -462,28 +759,32 @@
             <div class="character-entry">
                 <img src="img/1.jpg" alt="Kris" class="character-image">
                 <div class="character-description">
-                    <p><strong>Kris:</strong> O protagonista (aura + ego 💀💀💀) farmador de aura.</p>
+                    <p><strong>Kris</strong></p>
+                    <p>O protagonista (aura + ego 💀💀💀) farmador de aura.</p>
                 </div>
             </div>
 
             <div class="character-entry">
                 <img src="img/2.jpg" alt="Susie" class="character-image">
                 <div class="character-description">
-                    <p><strong>Susie:</strong>A "valentona" que faz cosplay de Barney roxo com uma personalidade emo gótica (amo góticas) </p>
+                    <p><strong>Susie</strong></p>
+                    <p>A "valentona" que faz cosplay de Barney roxo com uma personalidade emo gótica (amo góticas)</p>
                 </div>
             </div>
 
             <div class="character-entry">
                 <img src="img/3.jpg" alt="Ralsei" class="character-image">
                 <div class="character-description">
-                    <p><strong>Ralsei:</strong>O príncipe que tem uma quedinha pelo nosso farmador de aura.</p>
+                    <p><strong>Ralsei</strong></p>
+                    <p>O príncipe que tem uma quedinha pelo nosso farmador de aura.</p>
                 </div>
             </div>
 
             <div class="character-entry">
                 <img src="img/4.jpg" alt="Lancer" class="character-image">
                 <div class="character-description">
-                    <p><strong>Lancer:</strong> Filhin de papai que se acha o bonzão do time. É o que mais leva hate KKKKKKKKK</p>
+                    <p><strong>Lancer</strong></p>
+                    <p>Filhin de papai que se acha o bonzão do time. É o que mais leva hate KKKKKKKKK</p>
                 </div>
             </div>
 
@@ -497,11 +798,117 @@
         </main>
     </div>
 
+    <div class="sound-indicator" id="soundIndicator">🎵 Som tocando...</div>
+
     <script>
+        // GIFs temáticos de DELTARUNE para cada informação
+        const gifs = {
+            developer: 'https://media.tenor.com/RnW8O_F0VREAAAAC/toby-fox-undertale.gif',
+            release: 'https://media.tenor.com/9xKQqVvZQFUAAAAC/deltarune-chapter2.gif',
+            platform: 'https://media.tenor.com/tMGqo_4mW1AAAAAC/deltarune-kris.gif',
+            genre: 'https://media.tenor.com/X5L8YVVqQFwAAAAC/deltarune-battle.gif',
+            engine: 'https://media.tenor.com/VBnZ7rQONGIAAAAC/ralsei-deltarune.gif'
+        };
+
+        // Referências aos elementos
+        const infobox = document.getElementById('infobox');
+        const infoboxGif = document.getElementById('infoboxGif');
+        const soundIndicator = document.getElementById('soundIndicator');
+        
+        let currentAudio = null;
+        let currentTimeout = null;
+
+        // ✅ CORREÇÃO 3: Removida a função 'toggleTheme' duplicada que estava aqui.
+        
+        // Função para tocar som e mostrar GIF
+        function playSound(type) {
+            // Remove classe active e limpa timeout anterior
+            infobox.classList.remove('active');
+            if (currentTimeout) clearTimeout(currentTimeout);
+            
+            // Para áudio anterior se existir
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+
+            // Define o GIF baseado no tipo
+            if (gifs[type]) {
+                infoboxGif.style.backgroundImage = `url('${gifs[type]}')`;
+            }
+
+            // Adiciona classe active para animação
+            setTimeout(() => {
+                infobox.classList.add('active');
+            }, 50);
+
+            // Cria e toca o som (usando beep sintético já que sons reais podem não carregar)
+            playBeep(type);
+
+            // Mostra indicador de som
+            showSoundIndicator(type);
+
+            // Remove o GIF após 3 segundos
+            currentTimeout = setTimeout(() => {
+                infobox.classList.remove('active');
+            }, 3000);
+        }
+
+        // Função para criar sons sintéticos (Web Audio API)
+        function playBeep(type) {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            // Frequências diferentes para cada tipo
+            const frequencies = {
+                developer: 440,  // A4
+                release: 523,    // C5
+                platform: 659,   // E5
+                genre: 784,      // G5
+                engine: 880      // A5
+            };
+
+            oscillator.frequency.value = frequencies[type] || 440;
+            oscillator.type = 'square'; // Som retrô tipo 8-bit
+
+            // Envelope para som mais natural
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        // Função para mostrar indicador de som
+        function showSoundIndicator(type) {
+            const names = {
+                developer: '🎮 Toby Fox Theme',
+                release: '🎉 Launch Day',
+                platform: '💻 Multi-Platform',
+                genre: '⚔️ RPG Battle',
+                engine: '🔧 GameMaker'
+            };
+
+            soundIndicator.textContent = names[type] || '🎵 Som tocando...';
+            soundIndicator.classList.add('show');
+
+            setTimeout(() => {
+                soundIndicator.classList.remove('show');
+            }, 2000);
+        }
+
+        // Função de toggle de tema
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
+            // Efeito visual ao trocar tema
+            document.body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
         }
 
         // Carregar tema salvo
@@ -510,6 +917,58 @@
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-mode');
             }
+
+            // ✅ CORREÇÃO 2: Adicionada a forma correta de 'conectar' o botão ao clique
+            document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+
+            // Easter egg: clique triplo no título
+            let clickCount = 0;
+            let clickTimer = null;
+            
+            document.querySelector('h1').addEventListener('click', () => {
+                clickCount++;
+                
+                if (clickTimer) clearTimeout(clickTimer);
+                
+                if (clickCount === 3) {
+                    // Animação especial e som
+                    document.querySelector('h1').style.animation = 'shake 0.5s ease-in-out, gradientShift 5s ease infinite';
+                    playBeep('developer');
+                    showSoundIndicator('developer');
+                    
+                    setTimeout(() => {
+                        document.querySelector('h1').style.animation = 'gradientShift 5s ease infinite';
+                    }, 500);
+                    
+                    clickCount = 0;
+                } else {
+                    clickTimer = setTimeout(() => {
+                        clickCount = 0;
+                    }, 500);
+                }
+            });
+        });
+
+        // Adiciona sons ao passar mouse sobre cards de personagens (opcional)
+        document.querySelectorAll('.character-entry').forEach((entry, index) => {
+            entry.addEventListener('mouseenter', () => {
+                const frequencies = [330, 392, 494, 587]; // Notas diferentes para cada personagem
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.value = frequencies[index];
+                oscillator.type = 'sine';
+
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.2);
+            });
         });
     </script>
 </body>
